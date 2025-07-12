@@ -60,7 +60,7 @@ Factorial is the product of an integer and all smaller positive integers. n! is 
 
 Superfactorial is the product of an integer's factorial and the factorials of all smaller positive integers. n$ is superfactorial of n. For example, 3$ = 3! * 2! * 1! = 6 * 2 * 1 = 12
 
-Hyperfactorial is the product of an integer to the power of itself and all smaller positive integers to the power of themselves. H(n) is hyperfactorial of n. For example, H(3) = 3<sup>3</sup> * 2<sup>2</sup> * 1<sup>1</sup>. 9 * 4 * 1 = 36
+Hyperfactorial is the product of an integer to the power of itself and all smaller positive integers to the power of themselves. H(n) is hyperfactorial of n. For example, H(3) = 3<sup>3</sup> * 2<sup>2</sup> * 1<sup>1</sup> = 9 * 4 * 1 = 36
 
 <b>NOTE</b> that 0!, 0$ and H(0) are all equal to 1 
 
