@@ -5,7 +5,8 @@
 Since the regular Math Javascript library does not support inverse trigonometric functions (cosecant - csc,
 secant - sec, cotangent - cot), Pytamath.js includes them.
 
-```Pytamath.csc = function(csc){ // Cosecant
+```
+Pytamath.csc = function(csc){ // Cosecant
     return 1 / Math.sin(csc);
 }
 Pytamath.sec = function(sec){ // Secant
@@ -17,7 +18,8 @@ Pytamath.cot = function(cot){ // Cotangent
 ```
 
 # Inverse Reciprocal Functions
-```Pytamath.acsc = function(csc){ // Inverse cosecant
+```
+Pytamath.acsc = function(csc){ // Inverse cosecant
     return Math.asin(1/csc);
 }
 Pytamath.asec = function(sec){ // Inverse secant
@@ -30,7 +32,8 @@ Pytamath.acot = function(cot){ // Inverse cotangent
 
 # Rounding Numbers
 Uses & adds to the regular Math.Round() function with a new parameter - number digits after the decimal point.
-```Pytamath.roundNum = function(number, digits){ // Rounding to specific digits
+```
+Pytamath.roundNum = function(number, digits){ // Rounding to specific digits
     return Math.round(number * Math.pow(10, digits)) / Math.pow(10, digits);
 }
 ```
@@ -42,7 +45,8 @@ Degrees and Radians are two measurement units for angles. We can convert the val
 
 1° = 1rad * 180 / π
 
-```Pytamath.toRadians = function(num){ // Degrees to radians converter
+```
+Pytamath.toRadians = function(num){ // Degrees to radians converter
     return num * Math.PI / 180;
 }
 
@@ -62,7 +66,8 @@ Hyperfactorial is the product of an integer to the power of itself and all small
 
 Fun fact: the hyperfactorial of 9 is H(9) = 55696437941726556979200000
 
-```Pytamath.factorial = function(num){ // Factorial (eg. 3! = 3 * 2 * 1 = 6)
+```
+Pytamath.factorial = function(num){ // Factorial (eg. 3! = 3 * 2 * 1 = 6)
     let result = 1
     if(num > 0){
         for(let i = num; i >= 0; i--)
@@ -115,12 +120,13 @@ The biquadratic equation: ax<sup>4</sup> + bx<sup>2</sup> + c = 0 can be solved 
 
 When you have both values of t, take their square roots:
 
-t<sub>1,2<sub> = ±√x<sub>1</sub> 
-t<sub>3,4<sub> = ±√x<sub>2</sub>
+t<sub>1,2</sub> = ±√x<sub>1</sub> 
+t<sub>3,4</sub> = ±√x<sub>2</sub>
 
 If t < 0, you can't take it's square root, so if one t value is less than 0, you will only get two x answers. If both t values are less than 0, there will be no x values.
 
-```Pytamath.quadraticEquation = function(a, b, c, rule = ""){ // ax^2 + bx + c = 0; returns an array of one or two numbers (or null)
+```
+Pytamath.quadraticEquation = function(a, b, c, rule = ""){ // ax^2 + bx + c = 0; returns an array of one or two numbers (or null)
     const discriminant = b*b - 4*a*c
     let positiveResult = null, negativeResult = null
 
@@ -169,7 +175,8 @@ This function checks if a string value is a number. This function will return ``
 
 The check is made by multiplying the value by 1. If the string is a number, the product will be equal to the original value, but if it's not a number, it cannot be multiplied.
 
-```Pytamath.isNumber = function(value) { // Checks if a value is a number by multiplying it by 1
+```
+Pytamath.isNumber = function(value) { // Checks if a value is a number by multiplying it by 1
   return value * 1 == value
 }
 ```
@@ -177,7 +184,8 @@ The check is made by multiplying the value by 1. If the string is a number, the 
 # Condition checker
 With this function, you can check whether a number meets a certain condition. All you need to enter as the condition parameter is a sign (">", "<", "=", ">=", "<=", also "==" - it's the same as "=") and a value. These are examples of accepted values for the condition parameter: "x > 4", "x <= 5", "= -3", "ANSWER >= 6", "y => 2". <b>NOTE</b> that "2 > x", "7 < y" and such will be read as "x > 2", "y < 7".
 
-```Pytamath.checkCondition = function(value = 0, condition = ""){ // Checks a condition and returns either true or false
+```
+Pytamath.checkCondition = function(value = 0, condition = ""){ // Checks a condition and returns either true or false
     let sign = "", number = " ", positive = true
     for(let i = 0; i < condition.length; i++){
         if(condition[i] == "=" || condition[i] == ">" || condition[i] == "<"){
