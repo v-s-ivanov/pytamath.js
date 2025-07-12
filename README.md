@@ -1,6 +1,12 @@
 <h1>PYTAMATH.JS</h1>
 <h3>A mathematical library written in JavaScript.</h3>
 
+# How to use
+You can link this library to your html file using the following link:
+https://raw.githubusercontent.com/v-s-ivanov/pytamath.js/refs/heads/main/pytamath.js
+
+You can also download it from GitHub.
+
 # Reciprocal Functions
 Since the regular Math Javascript library does not support inverse trigonometric functions (cosecant - csc,
 secant - sec, cotangent - cot), Pytamath.js includes them.

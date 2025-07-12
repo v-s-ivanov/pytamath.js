@@ -9,6 +9,10 @@
  If you'd still like to credit the author, you may
  place a link to the Github account:
  https://github.com/v-s-ivanov
+
+ You can link this library to your html file using
+ the following link:
+ https://raw.githubusercontent.com/v-s-ivanov/pytamath.js/refs/heads/main/pytamath.js
 */
 
 const Pytamath = {}
