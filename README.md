@@ -232,3 +232,193 @@ Pytamath.checkCondition = function(value = 0, condition = ""){ // Checks a condi
 }
 ```
 
+# Temperature conversion
+The pytamath.js library has 3 functions for temperature conversion - one for each unit of measurement. Default units: toCelsius - fahrenheit, toFahrenheit & toKelvin - celsius.
+```
+// Temperature conversion
+
+Pytamath.toCelsius = function(value, unit = "f"){
+    switch(unit){
+        case "f":
+        case "F":
+        case "fahrenheit":
+        case "Fahrenheit":
+            return (value - 32) * 5/9
+            break;
+        case "k":
+        case "K":
+        case "kelvin":
+        case "Kelvin":
+            return value - 273.15
+            break;
+        default:
+            return null
+    }
+}
+
+Pytamath.toFahrenheit = function(value, unit = "c"){
+    switch(unit){
+        case "c":
+        case "C":
+        case "celsius":
+        case "Celsius":
+            return value * 9/5 + 32
+            break;
+        case "k":
+        case "K":
+        case "kelvin":
+        case "Kelvin":
+            return this.toFahrenheit(value - 273.15)
+            break;
+        default:
+            return null
+    }
+}
+
+Pytamath.toKelvin = function(value, unit = "c"){
+    switch(unit){
+        case "c":
+        case "C":
+        case "celsius":
+        case "Celsius":
+            return value + 273.15
+            break;
+        case "f":
+        case "f":
+        case "fahrenheit":
+        case "Fahrenheit":
+            return this.toCelsius(value) + 273.15
+            break;
+        default:
+            return null
+    }
+}
+```
+
+# Day of the year
+With the following function, you can check the number of a day in the year. Parameters: ```value``` (required), ```leapYear``` (optional, default = false), ```format``` (optional, default = "DD/MM"). Here is an example of accepted values for the ```value``` parameter:
+<b>'dd/mm' format (default):</b>
+"30th of June"
+"24th October"
+"18 february"
+"9 mar"
+"25/12"
+"09/07"
+"5/8"
+<b>'mm/dd' format:</b>
+"June 30th"
+"October 24"
+"Feb 18"
+"mar 14"
+"12/25"
+"07/09"
+"8/5"
+Example of accepted values for the ```format``` parameter:
+"DD/MM" (default)
+"dd/mm"
+"dd-mm"
+"dd.mm"
+"MM/DD"
+"mm/dd"
+"mm-dd"
+"mm.dd"
+<b>NOTE</b> that you don't have to make the ```leapYear``` parameter true in order to enter the date '29/02'.
+
+```
+Pytamath.dayOfYear = function(value, leapYear = false, format = "DD/MM"){
+        const monthSizes = [0,31,29,31,30,31,30,31,31,30,31,30,31],
+        months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 
+                'aug', 'sep', 'oct', 'nov', 'dec'],
+        monthNames = [null, // 0 is not a month
+        ['january', 'jan', 'January', 'Jan'],
+        ['february', 'feb', 'February', 'Feb'],
+        ['march', 'mar', 'March', 'Mar'],
+        ['april', 'apr', 'April', 'Apr'],
+        ['may', 'may', 'May', 'May'],
+        ['june', 'jun', 'June', 'Jun'],
+        ['july', 'jul', 'July', 'Jul'],
+        ['august', 'aug', 'August', 'Aug'],
+        ['september', 'sep', 'September', 'Sep'],
+        ['october', 'oct', 'October', 'Oct'],
+        ['november', 'nov', 'November', 'Nov'],
+        ['december', 'dec', 'December', 'Dec']
+    ]
+
+        value = value.toLowerCase()
+        value = value.replace(" ", "")
+        value = value.replace(10, "X")
+        value = value.replace(20, "XX")
+        value = value.replace(30, "XXX")
+        value = value.replace(0, "")
+        value = value.replace("X", 10)
+        value = value.replace("XX", 20)
+        value = value.replace("XXX", 30)
+        value = value.replace("st", "")
+        value = value.replace("nd", "")
+        value = value.replace("rd", "")
+        value = value.replace("th", "")
+        value = value.replace("of", "")
+        value = value.replace("-", "/")
+        value = value.replace(".", "/")
+        value = value.replace("\\", "/")
+
+        format = format.toLowerCase()
+        format = format.replace(" ", "")
+        format = format.replace("-", "/")
+        format = format.replace(".", "/")
+        format = format.replace("\\", "/")
+        switch(format){
+            case "dd/mm":
+            for(let i = 1; i < monthNames.length; i++){
+                for(let j = 0; j < monthNames[i].length; j++){
+                    value = value.replace(monthNames[i][j], "/" + i)
+                }
+            }
+            break;
+            case "mm/dd":
+            for(let i = 0; i < monthNames.length; i++){
+                for(let j = 0; j < monthNames[i].length; j++){
+                    value = value.replace(monthNames[i][j], i + "/")
+                }
+            }
+            break;
+        }
+
+
+        let day = "", month = "", dayDone = false, dayCount = 0
+        for(let i = 0; i < value.length; i++){
+            if(Pytamath.isNumber(value[i]) && !dayDone){
+                day += value[i]
+                if(day.length == 2){
+                    dayDone = true
+                    day = parseInt(day)
+                    if(day < 1 || day > 31) return null // Invalid day
+                }
+            }
+            else if(Pytamath.isNumber(value[i]) && dayDone){
+                month += value[i]
+                if(month.length == 2 || value.length == i + 1){
+                    month = parseInt(month)
+                    if(month < 1 || month > 12) return null // Invalid month
+                    break
+                }
+            }
+            else if(value[i] == "/" || value[i] == "-" || value[i] == "."){
+                dayDone = true
+            }
+        }
+        if(day > monthSizes[month]) return null // Invalid day for the month
+
+        for(let i = month; i > 0; i--){
+            if(i != month){
+                if(!leapYear && i == 2)
+                    dayCount += monthSizes[i] - 1
+                else dayCount += monthSizes[i]
+            }
+            else{
+                dayCount += day * 1
+            }
+        }
+        return dayCount
+}
+```
