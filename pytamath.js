@@ -7,12 +7,15 @@
  For more information, visit https://unlicense.org
 
  If you'd still like to credit the author, you may
- place a link to the Github account:
+ place a link to his Github account:
  https://github.com/v-s-ivanov
 
  You can link this library to your html file using
  the following link:
  https://raw.githubusercontent.com/v-s-ivanov/pytamath.js/refs/heads/main/pytamath.js
+
+ Version: 0.2.0-alpha
+ Production-ready: No
 */
 
 const Pytamath = {}
