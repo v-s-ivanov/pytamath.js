@@ -296,32 +296,32 @@ Pytamath.toKelvin = function(value, unit = "c"){
 ```
 
 # Day of the year
-With the following function, you can check the number of a day in the year. Parameters: ```value``` (required), ```leapYear``` (optional, default = false), ```format``` (optional, default = "DD/MM"). Here is an example of accepted values for the ```value``` parameter:
-<b>'dd/mm' format (default):</b>
-"30th of June"
-"24th October"
-"18 february"
-"9 mar"
-"25/12"
-"09/07"
-"5/8"
-<b>'mm/dd' format:</b>
-"June 30th"
-"October 24"
-"Feb 18"
-"mar 14"
-"12/25"
-"07/09"
-"8/5"
-Example of accepted values for the ```format``` parameter:
-"DD/MM" (default)
-"dd/mm"
-"dd-mm"
-"dd.mm"
-"MM/DD"
-"mm/dd"
-"mm-dd"
-"mm.dd"
+With the following function, you can check the number of a day in the year. Parameters: ```value``` (required), ```leapYear``` (optional, default = false), ```format``` (optional, default = "DD/MM"). Here is an example of accepted values for the ```value``` parameter:<br>
+<b>'dd/mm' format (default):</b><br>
+"30th of June"<br>
+"24th October"<br>
+"18 february"<br>
+"9 mar"<br>
+"25/12"<br>
+"09/07"<br>
+"5/8"<br>
+<b>'mm/dd' format:</b><br>
+"June 30th"<br>
+"October 24"<br>
+"Feb 18"<br>
+"mar 14"<br>
+"12/25"<br>
+"07/09"<br>
+"8/5"<br>
+Example of accepted values for the ```format``` parameter:<br>
+"DD/MM" (default)<br>
+"dd/mm"<br>
+"dd-mm"<br>
+"dd.mm"<br>
+"MM/DD"<br>
+"mm/dd"<br>
+"mm-dd"<br>
+"mm.dd"<br>
 <b>NOTE</b> that you don't have to make the ```leapYear``` parameter true in order to enter the date '29/02'.
 
 ```
