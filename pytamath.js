@@ -238,100 +238,98 @@ Pytamath.toKelvin = function(value, unit = "c"){
 }
 
 Pytamath.dayOfYear = function(value, leapYear = false, format = "DD/MM"){
-    const monthSizes = [0,31,29,31,30,31,30,31,31,30,31,30,31],
-    months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 
-            'aug', 'sep', 'oct', 'nov', 'dec'],
-    monthNames = [null, // 0 is not a month
-    ['january', 'jan', 'January', 'Jan'],
-    ['february', 'feb', 'February', 'Feb'],
-    ['march', 'mar', 'March', 'Mar'],
-    ['april', 'apr', 'April', 'Apr'],
-    ['may', 'may', 'May', 'May'],
-    ['june', 'jun', 'June', 'Jun'],
-    ['july', 'jul', 'July', 'Jul'],
-    ['august', 'aug', 'August', 'Aug'],
-    ['september', 'sep', 'September', 'Sep'],
-    ['october', 'oct', 'October', 'Oct'],
-    ['november', 'nov', 'November', 'Nov'],
-    ['december', 'dec', 'December', 'Dec']
-]
+        const monthSizes = [0,31,29,31,30,31,30,31,31,30,31,30,31],
+        months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 
+                'aug', 'sep', 'oct', 'nov', 'dec'],
+        monthNames = [null, // 0 is not a month
+        ['january', 'jan', 'January', 'Jan'],
+        ['february', 'feb', 'February', 'Feb'],
+        ['march', 'mar', 'March', 'Mar'],
+        ['april', 'apr', 'April', 'Apr'],
+        ['may', 'may', 'May', 'May'],
+        ['june', 'jun', 'June', 'Jun'],
+        ['july', 'jul', 'July', 'Jul'],
+        ['august', 'aug', 'August', 'Aug'],
+        ['september', 'sep', 'September', 'Sep'],
+        ['october', 'oct', 'October', 'Oct'],
+        ['november', 'nov', 'November', 'Nov'],
+        ['december', 'dec', 'December', 'Dec']
+    ]
 
-    value = value.toLowerCase()
-    value = value.replace(" ", "")
-    value = value.replace(10, "X")
-    value = value.replace(20, "XX")
-    value = value.replace(30, "XXX")
-    value = value.replace(0, "")
-    value = value.replace("X", 10)
-    value = value.replace("XX", 20)
-    value = value.replace("XXX", 30)
-    value = value.replace("st", "")
-    value = value.replace("nd", "")
-    value = value.replace("rd", "")
-    value = value.replace("th", "")
-    value = value.replace("of", "")
-    value = value.replace("-", "/")
-    value = value.replace(".", "/")
-    value = value.replace("\\", "/")
+        value = value.toLowerCase()
+        value = value.replace(" ", "")
+        value = value.replace(10, "X")
+        value = value.replace(20, "XX")
+        value = value.replace(30, "XXX")
+        value = value.replace(0, "")
+        value = value.replace("X", 10)
+        value = value.replace("XX", 20)
+        value = value.replace("XXX", 30)
+        value = value.replace("st", "")
+        value = value.replace("nd", "")
+        value = value.replace("rd", "")
+        value = value.replace("th", "")
+        value = value.replace("of", "")
+        value = value.replace("-", "/")
+        value = value.replace(".", "/")
+        value = value.replace("\\", "/")
 
-    format = format.toLowerCase()
-    format = format.replace(" ", "")
-    format = format.replace("-", "/")
-    format = format.replace(".", "/")
-    format = format.replace("\\", "/")
-    switch(format){
-        case "dd/mm":
-        for(let i = 1; i < monthNames.length; i++){
-            for(let j = 0; j < monthNames[i].length; j++){
-                value = value.replace(monthNames[i][j], "/" + i)
+        format = format.toLowerCase()
+        format = format.replace(" ", "")
+        format = format.replace("-", "/")
+        format = format.replace(".", "/")
+        format = format.replace("\\", "/")
+        switch(format){
+            case "dd/mm":
+            for(let i = 1; i < monthNames.length; i++){
+                for(let j = 0; j < monthNames[i].length; j++){
+                    value = value.replace(monthNames[i][j], "/" + i)
+                }
             }
-        }
-        break;
-        case "mm/dd":
-        for(let i = 0; i < monthNames.length; i++){
-            for(let j = 0; j < monthNames[i].length; j++){
-                value = value.replace(monthNames[i][j], i + "/")
+            break;
+            case "mm/dd":
+            for(let i = 0; i < monthNames.length; i++){
+                for(let j = 0; j < monthNames[i].length; j++){
+                    value = value.replace(monthNames[i][j], i + "/")
+                }
             }
+            break;
         }
-        break;
-    }
 
 
-    let day = "", month = "", dayDone = false, dayCount = 0
-    for(let i = 0; i < value.length; i++){
-        if(Pytamath.isNumber(value[i]) && !dayDone){
-            day += value[i]
-            if(day.length == 2){
+        let day = "", month = "", dayDone = false, dayCount = 0
+        for(let i = 0; i < value.length; i++){
+            if(Pytamath.isNumber(value[i]) && !dayDone){
+                day += value[i]
+                if(day.length == 2){
+                    dayDone = true
+                    day = parseInt(day)
+                    if(day < 1 || day > 31) return null // Invalid day
+                }
+            }
+            else if(Pytamath.isNumber(value[i]) && dayDone){
+                month += value[i]
+                if(month.length == 2 || value.length == i + 1){
+                    month = parseInt(month)
+                    if(month < 1 || month > 12) return null // Invalid month
+                    break
+                }
+            }
+            else if(value[i] == "/" || value[i] == "-" || value[i] == "."){
                 dayDone = true
-                day = parseInt(day)
-                if(day < 1 || day > 31) return null // Invalid day
             }
         }
-        else if(Pytamath.isNumber(value[i]) && dayDone){
-            month += value[i]
-            if(month.length == 2 || value.length == i + 1){
-                month = parseInt(month)
-                if(month < 1 || month > 12) return null // Invalid month
-                break
-            }
-        }
-        else if(value[i] == "/" || value[i] == "-" || value[i] == "."){
-            dayDone = true
-        }
-    }
-    if(day > monthSizes[month]) return null // Invalid day for the month
+        if(day > monthSizes[month]) return null // Invalid day for the month
 
-    for(let i = month; i > 0; i--){
-        if(i != month){
-            if(!leapYear && i == 2)
-                dayCount += monthSizes[i] - 1
-            else dayCount += monthSizes[i]
+        for(let i = month; i > 0; i--){
+            if(i != month){
+                if(!leapYear && i == 2)
+                    dayCount += monthSizes[i] - 1
+                else dayCount += monthSizes[i]
+            }
+            else{
+                dayCount += day * 1
+            }
         }
-        else{
-            dayCount += day * 1
-        }
-    }
-    return dayCount
+        return dayCount
 }
-
-console.log(Pytamath.dayOfYear("8th of Feb", true, "dd/mm"))
