@@ -333,3 +333,71 @@ Pytamath.dayOfYear = function(value, leapYear = false, format = "DD/MM"){
         }
         return dayCount
 }
+
+Pytamath.isLeapYear = function(year){ // Checks if a year is a leap year
+    if(year < 0) return null // Negative years are not supported
+    if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){
+        return true // Leap year
+    }
+    else{
+        return false // Not a leap year
+    }
+}
+
+Pytamath.root = function(value, root = 2){ // Returns the root of a number
+    return Math.pow(value, 1 / root);
+}
+
+Pytamath.gcd = function(a, b){ // Greatest common divisor
+    if(b == 0) return a;
+    else if(a == 0) return b;
+    else if(a == b) return a;
+    else if(a < 0 || b < 0) return null; // Negative numbers
+    else if(a == 1 || b == 1) return 1; // If one of the numbers is 1, the GCD is 1
+    else if(a == 0 && b == 0) return null; // If both numbers are 0, the GCD is undefined
+    else{
+        let smallestnum = Math.min(a, b)
+        for(let i = smallestnum; i > 0; i--){
+            if(a % i == 0 && b % i == 0) {
+                return i;
+                break
+            }
+        }
+    }
+}
+
+Pytamath.lcm = function(a, b){ // Least common multiple
+    if(a == 0 || b == 0) return 0; // If one of the numbers is 0, the LCM is 0
+    else if(a < 0 || b < 0) return null; // Negative numbers
+    else if(a == b) return a; // If both numbers are equal, the LCM is the number itself
+    else{
+        let smallestnum = Math.min(a, b)
+        for(let i = smallestnum; i <= a * b; i++){
+            if(i % a == 0 && i % b == 0) {
+                return i;
+                break
+            }
+        }
+    }
+}
+
+Pytamath.isPrime = function(num){ // Checks if a number is prime
+    if(num < 2) return false; // 0 and 1 are not prime numbers
+    for(let i = 2; i <= Math.sqrt(num); i++){
+        if(num % i == 0) return false; // If the number is divisible by any number other than 1 and itself, it is not prime
+    }
+    return true; // If no divisors were found, the number is prime
+}
+
+Pytamath.nthPrime = function(n){
+    let count = 0
+    for(let i = 2; count < n; i++){
+        if(Pytamath.isPrime(i)){
+            count++;
+            if(count == n) return i; // If the count of prime numbers reaches n, return the current number
+        }
+    }
+    return null; // If no prime number was found, return null
+}
+
+console.log(Pytamath.nthPrime(10)) // Example usage of nthPrime function

@@ -8,8 +8,7 @@ https://raw.githubusercontent.com/v-s-ivanov/pytamath.js/refs/heads/main/pytamat
 You can also download it from GitHub.
 
 # Reciprocal Functions
-Since the regular Math Javascript library does not support inverse trigonometric functions (cosecant - csc,
-secant - sec, cotangent - cot), Pytamath.js includes them.
+The Pytamath.js library includes inverse trigonometric functions (cosecant - csc, secant - sec, cotangent - cot):
 
 ```
 Pytamath.csc = function(csc){ // Cosecant
@@ -420,5 +419,113 @@ Pytamath.dayOfYear = function(value, leapYear = false, format = "DD/MM"){
             }
         }
         return dayCount
+}
+```
+
+# Leap year checker
+A leap year is a year that has the date 29th of February. It's once every 4 years, except for years divided by 100, but not by 400. For example:<br>
+1958 - not a leap year<br>
+1960 - leap year<br>
+2000 - leap year<br>
+1900 - not a leap year<br>
+2100 - not a leap year<br>
+2400 - leap year<br>
+Here is a function that determines whether a year is leap or not:
+```
+Pytamath.isLeapYear = function(year){ // Checks if a year is a leap year
+    if(year < 0) return null // Negative years are not supported
+    if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){
+        return true // Leap year
+    }
+    else{
+        return false // Not a leap year
+    }
+}
+```
+
+# Root
+The following function calculates the root of a number. By default, the root is 2, but you can make it bigger.
+```
+Pytamath.root = function(value, root = 2){ // Returns the root of a number
+    return Math.pow(value, 1 / root);
+}
+```
+For example, Pytamath.root(27, 3) returns 3.
+
+# Greatest common divider
+The greatest common divider of two or more numbers is the biggest number that can divide all of the numbers.
+```
+Pytamath.gcd = function(a, b){ // Greatest common divisor
+    if(b == 0) return a;
+    else if(a == 0) return b;
+    else if(a == b) return a;
+    else if(a < 0 || b < 0) return null; // Negative numbers
+    else if(a == 1 || b == 1) return 1; // If one of the numbers is 1, the GCD is 1
+    else if(a == 0 && b == 0) return null; // If both numbers are 0, the GCD is undefined
+    else{
+        let smallestnum = Math.min(a, b)
+        for(let i = smallestnum; i > 0; i--){
+            if(a % i == 0 && b % i == 0) {
+                return i;
+                break
+            }
+        }
+    }
+}
+```
+
+# Least common multiple
+The least common multiple of two or more numbers is the biggest number that can be divided by all numbers. It's highest possible value is the product of all numbers.
+```
+Pytamath.lcm = function(a, b){ // Least common multiple
+    if(a == 0 || b == 0) return 0; // If one of the numbers is 0, the LCM is 0
+    else if(a < 0 || b < 0) return null; // Negative numbers
+    else if(a == b) return a; // If both numbers are equal, the LCM is the number itself
+    else{
+        let smallestnum = Math.min(a, b)
+        for(let i = smallestnum; i <= a * b; i++){
+            if(i % a == 0 && i % b == 0) {
+                return i;
+                break
+            }
+        }
+    }
+}
+```
+
+# Prime number checker
+This function checks if a number is prime. A prime number is a number which can be divided only by 1 and itself. <b>NOTE</b> that 1 is <b>NOT A PRIME NUMBER</b>. The smallest prime number is 2.
+```
+Pytamath.isPrime = function(num){ // Checks if a number is prime
+    if(num < 2) return false; // 0 and 1 are not prime numbers
+    for(let i = 2; i <= Math.sqrt(num); i++){
+        if(num % i == 0) return false; // If the number is divisible by any number other than 1 and itself, it is not prime
+    }
+    return true; // If no divisors were found, the number is prime
+}
+```
+
+# Nth prime number
+This function checks the order of a prime number. For example:<br>
+2 - 1st prime<br>
+3 - 2nd prime<br>
+5 - 3rd prime<br>
+7 - 4th prime<br>
+11 - 5th prime<br>
+13 - 6th prime<br>
+17 - 7th prime<br>
+19 - 8th prime<br>
+23 - 9th prime<br>
+29 - 10th prime
+```
+Pytamath.nthPrime = function(n){
+    let count = 0
+    for(let i = 2; count < n; i++){
+        if(Pytamath.isPrime(i)){
+            count++;
+            if(count == n) return i; // If the count of prime numbers reaches n, return the current number
+        }
+    }
+    return null; // If no prime number was found, return null
 }
 ```
