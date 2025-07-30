@@ -330,18 +330,18 @@ Pytamath.dayOfYear = function(value, leapYear = false, format = "DD/MM"){
         months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 
                 'aug', 'sep', 'oct', 'nov', 'dec'],
         monthNames = [null, // 0 is not a month
-        ['january', 'jan', 'January', 'Jan'],
-        ['february', 'feb', 'February', 'Feb'],
-        ['march', 'mar', 'March', 'Mar'],
-        ['april', 'apr', 'April', 'Apr'],
-        ['may', 'may', 'May', 'May'],
-        ['june', 'jun', 'June', 'Jun'],
-        ['july', 'jul', 'July', 'Jul'],
-        ['august', 'aug', 'August', 'Aug'],
-        ['september', 'sep', 'September', 'Sep'],
-        ['october', 'oct', 'October', 'Oct'],
-        ['november', 'nov', 'November', 'Nov'],
-        ['december', 'dec', 'December', 'Dec']
+        ['january', 'jan'],
+        ['february', 'feb'],
+        ['march', 'mar'],
+        ['april', 'apr'],
+        ['may', 'may'],
+        ['june', 'jun'],
+        ['july', 'jul'],
+        ['august', 'aug'],
+        ['september', 'sep'],
+        ['october', 'oct'],
+        ['november', 'nov'],
+        ['december', 'dec']
     ]
 
         value = value.toLowerCase()
