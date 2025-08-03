@@ -463,7 +463,3 @@ Pytamath.randomDate = function(leapYear = true, format = "dd/mm"){
             break;
     }
 }
-
-console.log(Pytamath.randomDate(true, "mm-dd"))
-console.log(Pytamath.randomDate(false, "dd.mm"))
-console.log(Pytamath.randomDate(false, "dd\\mm"))
