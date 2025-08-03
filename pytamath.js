@@ -14,7 +14,7 @@
  the following link:
  https://raw.githubusercontent.com/v-s-ivanov/pytamath.js/refs/heads/main/pytamath.js
 
- Version: 0.2.0-alpha
+ Version: 0.3.0-alpha
  Production-ready: No
 */
 
@@ -281,19 +281,22 @@ Pytamath.dayOfYear = function(value, leapYear = false, format = "DD/MM"){
         format = format.replace("\\", "/")
         switch(format){
             case "dd/mm":
-            for(let i = 1; i < monthNames.length; i++){
-                for(let j = 0; j < monthNames[i].length; j++){
-                    value = value.replace(monthNames[i][j], "/" + i)
+                for(let i = 1; i < monthNames.length; i++){
+                    for(let j = 0; j < monthNames[i].length; j++){
+                        value = value.replace(monthNames[i][j], "/" + i)
+                    }
                 }
-            }
-            break;
+                break;
             case "mm/dd":
-            for(let i = 0; i < monthNames.length; i++){
-                for(let j = 0; j < monthNames[i].length; j++){
-                    value = value.replace(monthNames[i][j], i + "/")
+                for(let i = 0; i < monthNames.length; i++){
+                    for(let j = 0; j < monthNames[i].length; j++){
+                        value = value.replace(monthNames[i][j], i + "/")
+                    }
                 }
-            }
-            break;
+                break;
+            default:
+                return "Invalid date format, accepted values are 'dd/mm' and 'mm/dd'"
+                break;
         }
 
 
@@ -400,4 +403,67 @@ Pytamath.nthPrime = function(n){
     return null; // If no prime number was found, return null
 }
 
-console.log(Pytamath.nthPrime(10)) // Example usage of nthPrime function
+Pytamath.nthFibonacci = function(n){ // Fibonacci line: 0, 1, 0+1 = 1, 1+1 = 2, 1+2 = 3, 2+3 = 5, 3+5 = 8, 5+8 = 13 and so on... 
+    let firstNum = 0, secondNum = 1
+    for(let i = 0; i < n; i++){
+        if(firstNum < secondNum){
+            firstNum += secondNum
+        }
+        else{
+            secondNum += firstNum
+        }
+    }
+    return Math.min(firstNum,secondNum)
+}
+
+Pytamath.isFibonacci = function(num){ // Checks if a number is part of the Fibonacci line (see Pytamath.nthFibonacci)
+    let fibonacciFound = false
+    for(let i = 0; num >= this.nthFibonacci(i); i++){
+        if(num == this.nthFibonacci(i)){
+            fibonacciFound = true
+            break;
+        }
+    }
+    return fibonacciFound
+}
+
+Pytamath.random = function(min, max, digits = 0){
+    return (Math.floor(Math.random() * (max * Math.pow(10, digits) - min * Math.pow(10, digits)) + 1 * Math.pow(10,digits)) + min * Math.pow(10, digits)) / Math.pow(10, digits)
+}
+
+Pytamath.randomDate = function(leapYear = true, format = "dd/mm"){
+    format = format.toLowerCase()
+    format = format.replace(" ", "")
+
+    let dividingSign = format
+    dividingSign = dividingSign.replace("d", "")
+    dividingSign = dividingSign.replace("d", "")
+    dividingSign = dividingSign.replace("m", "")
+    dividingSign = dividingSign.replace("m", "")
+
+    format = format.replace("-", "/")
+    format = format.replace(".", "/")
+    format = format.replace("\\", "/")
+
+    const monthSizes = [0,31,29,31,30,31,30,31,31,30,31,30,31]
+    if(!leapYear) monthSizes[2]--
+    let month = Pytamath.random(1,12)
+    let date = Pytamath.random(1, monthSizes[month])
+    if(month < 10) month = `0${month}`
+    if(date < 10) date = `0${date}`
+    switch(format){
+        case "dd/mm":
+            return `${date}${dividingSign}${month}`
+            break;
+        case "mm/dd":
+            return `${month}${dividingSign}${date}`
+            break;
+        default:
+            return "Invalid date format, accepted values are 'dd/mm' and 'mm/dd'"
+            break;
+    }
+}
+
+console.log(Pytamath.randomDate(true, "mm-dd"))
+console.log(Pytamath.randomDate(false, "dd.mm"))
+console.log(Pytamath.randomDate(false, "dd\\mm"))

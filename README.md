@@ -368,19 +368,22 @@ Pytamath.dayOfYear = function(value, leapYear = false, format = "DD/MM"){
         format = format.replace("\\", "/")
         switch(format){
             case "dd/mm":
-            for(let i = 1; i < monthNames.length; i++){
-                for(let j = 0; j < monthNames[i].length; j++){
-                    value = value.replace(monthNames[i][j], "/" + i)
+                for(let i = 1; i < monthNames.length; i++){
+                    for(let j = 0; j < monthNames[i].length; j++){
+                        value = value.replace(monthNames[i][j], "/" + i)
+                    }
                 }
-            }
-            break;
+                break;
             case "mm/dd":
-            for(let i = 0; i < monthNames.length; i++){
-                for(let j = 0; j < monthNames[i].length; j++){
-                    value = value.replace(monthNames[i][j], i + "/")
+                for(let i = 0; i < monthNames.length; i++){
+                    for(let j = 0; j < monthNames[i].length; j++){
+                        value = value.replace(monthNames[i][j], i + "/")
+                    }
                 }
-            }
-            break;
+                break;
+            default:
+                return "Invalid date format, accepted values are 'dd/mm' and 'mm/dd'"
+                break;
         }
 
 
@@ -528,4 +531,110 @@ Pytamath.nthPrime = function(n){
     }
     return null; // If no prime number was found, return null
 }
+```
+
+# Nth Fibonacci number
+The Fibonacci line of numbers is as follows: 0, 1, 0+1 = 1, 1+1 = 2, 1+2 = 3, 2+3 = 5, 3+5 = 8, 5+8 = 13 and so on... <br>
+0 - 0th Fibonacci<br>
+1 - 1st Fibonacci<br>
+0 + 1 = 1 - 2nd Fibonacci<br>
+1 + 1 = 2 - 3rd Fibonacci<br>
+1 + 2 = 3 - 4th Fibonacci<br>
+2 + 3 = 5 - 5th Fibonacci<br>
+3 + 5 = 8 - 6th Fibonacci<br>
+5 + 8 = 13 - 7th Fibonacci<br>
+8 + 13 = 21 - 8th Fibonacci<br>
+13 + 21 = 34 - 9th Fibonacci<br>
+21 + 34 = 55 - 10th Fibonacci<br>
+
+```
+Pytamath.nthFibonacci = function(n){ // Fibonacci line: 0, 1, 0+1 = 1, 1+1 = 2, 1+2 = 3, 2+3 = 5, 3+5 = 8, 5+8 = 13 and so on... 
+    let firstNum = 0, secondNum = 1
+    for(let i = 0; i < n; i++){
+        if(firstNum < secondNum){
+            firstNum += secondNum
+        }
+        else{
+            secondNum += firstNum
+        }
+    }
+    return Math.min(firstNum,secondNum)
+}
+```
+
+# Fibonacci number checker
+This function checks whether the provided number is part of the Fibonacci line or not. It uses Pytamath.nthFibonacci() and checks all Fibonacci numbers lower than or equal to the provided value. If there is no match, the function returns ```false```.
+
+```
+Pytamath.isFibonacci = function(num){ // Checks if a number is part of the Fibonacci line (see Pytamath.nthFibonacci)
+    let fibonacciFound = false
+    for(let i = 0; num >= this.nthFibonacci(i); i++){
+        if(num == this.nthFibonacci(i)){
+            fibonacciFound = true
+            break;
+        }
+    }
+    return fibonacciFound
+}
+```
+
+# Random number generator with decimal numbers
+Pytamath.random() generates a random number in a provided interval. The function can also be configured to generate a decimal number with the ```digits``` parameter (default value = 0). For example, ```Pytamath.random(0,10,2)``` will generate a random number between 0 and 10 with up to 2 digits after the decimal point (might be less if the last digit is 0, for example 1.60 will be displayed as 1.6 and 1.00 as 1). <br>
+
+```
+Pytamath.random = function(min, max, digits = 0){
+    return (Math.floor(Math.random() * (max * Math.pow(10, digits) - min * Math.pow(10, digits))) + min * Math.pow(10, digits)) / Math.pow(10, digits)
+}
+``` 
+
+# Random date generator
+Pytamath.randomDate() generates a random valid date. It has 2 parameters: ```leapyear``` (default value = true) and ```format``` ("dd/mm" by default, but could also be "mm/dd" and the divider sign can be changed to any other character, which will be displayed in the final result).
+
+```
+Pytamath.randomDate = function(leapYear = true, format = "dd/mm"){
+    format = format.toLowerCase()
+    format = format.replace(" ", "")
+
+    let dividingSign = format
+    dividingSign = dividingSign.replace("d", "")
+    dividingSign = dividingSign.replace("d", "")
+    dividingSign = dividingSign.replace("m", "")
+    dividingSign = dividingSign.replace("m", "")
+
+    format = format.replace("-", "/")
+    format = format.replace(".", "/")
+    format = format.replace("\\", "/")
+
+    const monthSizes = [0,31,29,31,30,31,30,31,31,30,31,30,31]
+    if(!leapYear) monthSizes[2]--
+    let month = Pytamath.random(1,12)
+    let date = Pytamath.random(1, monthSizes[month])
+    if(month < 10) month = `0${month}`
+    if(date < 10) date = `0${date}`
+    switch(format){
+        case "dd/mm":
+            return `${date}${dividingSign}${month}`
+            break;
+        case "mm/dd":
+            return `${month}${dividingSign}${date}`
+            break;
+        default:
+            return "Invalid date format, accepted values are 'dd/mm' and 'mm/dd'"
+            break;
+    }
+}
+```
+
+Example usage:
+```
+console.log(Pytamath.randomDate(true, "mm-dd"))
+console.log(Pytamath.randomDate(false, "dd.mm"))
+console.log(Pytamath.randomDate(false, "dd\\mm")) // When using a backslash, MAKE SURE TO TYPE ANOTHER ONE AFTER IT!!!
+```
+
+Console (result is an example, you will probably get a different date):
+```
+03-26
+27.08
+24\07
 ```
