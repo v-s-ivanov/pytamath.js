@@ -12,7 +12,7 @@
 
  You can link this library to your html file using
  the following link:
- https://raw.githubusercontent.com/v-s-ivanov/pytamath.js/refs/heads/main/pytamath.js
+ https://raw.githubusercontent.com/v-s-ivanov/pytamath.js/refs/heads/master/pytamath.js
 
  Version: 0.3.0-alpha
  Production-ready: No
@@ -463,6 +463,7 @@ Pytamath.randomDate = function(leapYear = true, format = "dd/mm"){
             break;
     }
 }
+<<<<<<< HEAD
 
 Pytamath.randomTime = function(format = "hh:mm:ss"){
     format = format.toLowerCase()
@@ -645,3 +646,5 @@ Pytamath.dateDifference = function(date1, date2, format = "dd/mm/yyyy"){
 }
 
 console.log(Pytamath.dateDifference("29/07/1950", "08/02/2022", "dd/mm/yy"))
+=======
+>>>>>>> 3510cd2d3ccbf1728dc86ec902bdeefa13c713fb
