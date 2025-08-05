@@ -12,7 +12,7 @@
 
  You can link this library to your html file using
  the following link:
- https://raw.githubusercontent.com/v-s-ivanov/pytamath.js/refs/heads/main/pytamath.js
+ https://raw.githubusercontent.com/v-s-ivanov/pytamath.js/refs/heads/master/pytamath.js
 
  Version: 0.3.0-alpha
  Production-ready: No
