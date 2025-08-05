@@ -638,3 +638,208 @@ Console (result is an example, you will probably get a different date):
 27.08
 24\07
 ```
+
+# Random Time
+With Pytamath.randomTime(), you can now generate a random hour, minute and second. Formats can be "hh:mm:ss", "hh:mm", "mm:ss". ":" can be replaced with any other sign you like.
+
+```
+Pytamath.randomTime = function(format = "hh:mm:ss"){
+    format = format.toLowerCase()
+    format = format.replace(" ", "")
+
+    let dividingSign = format.replace("h", "")
+    dividingSign = dividingSign.replace("h", "")
+    dividingSign = dividingSign.replace("m", "")
+    dividingSign = dividingSign.replace("m", "")
+    dividingSign = dividingSign.replace("s", "")
+    dividingSign = dividingSign.replace("s", "")
+
+    format = format.replace("-", ":")
+    format = format.replace(".", ":")
+    format = format.replace("\\", ":")
+
+    let hours = Pytamath.random(0, 23)
+    let minutes = Pytamath.random(0, 59)
+    let seconds = Pytamath.random(0, 59)
+
+    if(hours < 10) hours = `0${hours}`
+    if(minutes < 10) minutes = `0${minutes}`
+    if(seconds < 10) seconds = `0${seconds}`
+
+    switch(format){
+        case "hh:mm:ss":
+            return `${hours}${dividingSign}${minutes}${dividingSign}${seconds}`
+            break;
+        case "hh:mm":
+            return `${hours}${dividingSign}${minutes}`
+            break;
+        case "mm:ss":
+            return `${minutes}${dividingSign}${seconds}`
+            break;
+        default:
+            return "Invalid time format, accepted values are 'hh:mm:ss' and 'mm:ss'"
+            break;
+    }
+}
+```
+
+# Random Date & Time
+Pytamath.randomDateTime() combines the previous 2 functions into one result. Two formats need to be provided.
+
+```
+Pytamath.randomDateTime = function(leapYear = true, dateFormat = "dd/mm", timeFormat = "hh:mm:ss"){
+    const date = Pytamath.randomDate(leapYear, dateFormat)
+    const time = Pytamath.randomTime(timeFormat)
+    return `${date} ${time}`
+}
+```
+
+# Date Difference
+Pytamath.dateDifference() calculates the difference between two dates (with the years as well). Leap years are also considered. The function returns the following object:
+
+```
+{ // Example values
+    years: 12,
+    months: 7,
+    days: 5
+}
+```
+
+Here is the code:
+
+```
+Pytamath.dateDifference = function(date1, date2, format = "dd/mm/yyyy"){
+    format = format.toLowerCase()
+    format = format.replace(" ", "")
+    format = format.replace("-", "/")
+    format = format.replace(".", "/")
+    format = format.replace("\\", "/")
+
+    const monthSizes = [0,31,29,31,30,31,30,31,31,30,31,30,31]
+    let day1 = 0, month1 = 0, year1 = 0
+    let day2 = 0, month2 = 0, year2 = 0
+    let yearDifference, dayDifference, monthDifference
+    
+    date1 = date1.replace("30", "XXX")
+    date1 = date1.replace("20", "XX")
+    date1 = date1.replace("10", "X")
+    date1 = date1.replace("0", "")
+    date1 = date1.replace("XXX", 30)
+    date1 = date1.replace("XX", 20)
+    date1 = date1.replace("X", 10)
+
+    
+    date2 = date2.replace("30", "XXX")
+    date2 = date2.replace("20", "XX")
+    date2 = date2.replace("10", "X")
+    date2 = date2.replace("0", "")
+    date2 = date2.replace("XXX", 30)
+    date2 = date2.replace("XX", 20)
+    date2 = date2.replace("X", 10)
+
+    switch(format) {
+        case "dd/mm/yyyy":
+        case "dd/mm/yy":
+            day1 = parseInt(date1.split("/")[0]);
+            month1 = parseInt(date1.split("/")[1]);
+            year1 = parseInt(date1.split("/")[2]);
+
+            day2 = parseInt(date2.split("/")[0]);
+            month2 = parseInt(date2.split("/")[1]);
+            year2 = parseInt(date2.split("/")[2]);
+            break;
+        case "mm/dd/yyyy":
+        case "mm/dd/yy":
+            month1 = parseInt(date1.split("/")[0]);
+            day1 = parseInt(date1.split("/")[1]);
+            year1 = parseInt(date1.split("/")[2]);
+
+            month2 = parseInt(date2.split("/")[0]);
+            day2 = parseInt(date2.split("/")[1]);
+            year2 = parseInt(date2.split("/")[2]);
+            break;
+        case "yyyy/mm/dd":
+        case "yy/mm/dd":
+            year1 = parseInt(date1.split("/")[0]);
+            month1 = parseInt(date1.split("/")[1]);
+            day1 = parseInt(date1.split("/")[2]);
+
+            year2 = parseInt(date2.split("/")[0]);
+            month2 = parseInt(date2.split("/")[1]);
+            day2 = parseInt(date2.split("/")[2]);
+            break;
+        case "yyyy/dd/mm":
+        case "yy/dd/mm":
+            year1 = parseInt(date1.split("/")[0]);
+            day1 = parseInt(date1.split("/")[1]);
+            month1 = parseInt(date1.split("/")[2]);
+
+            year2 = parseInt(date2.split("/")[0]);
+            day2 = parseInt(date2.split("/")[1]);
+            month2 = parseInt(date2.split("/")[2]);
+            break;
+        default:
+            return "Invalid date format, accepted values are 'dd/mm/yyyy', 'mm/dd/yyyy', 'yyyy/mm/dd', 'yyyy/mm/yy', 'yyyy/dd/mm'"
+            break;
+
+    }
+
+    format = format.replace("yyyy", "yy")
+    format = format.replace("yy/", "")
+    format = format.replace("/yy", "")
+
+    if(year1 > year2){
+        const temp = day1
+        day1 = day2
+        day2 = temp
+        const temp2 = month1
+        month1 = month2
+        month2 = temp2
+        const temp3 = year1
+        year1 = year2
+        year2 = temp3
+    }
+    else if(year1 == year2 && month1 > month2){
+        const temp = day1
+        day1 = day2
+        day2 = temp
+        const temp2 = month1
+        month1 = month2
+        month2 = temp2
+    }
+    else if(year1 == year2 && month1 == month2 && day1 > day2){
+        const temp = day1
+        day1 = day2
+        day2 = temp
+    }
+
+    if(day1 > day2){
+        if(month2 != 1){
+            day2 += monthSizes[month2 - 1]
+            if(!Pytamath.isLeapYear(year2) && month2 == 3)
+                day2 -= 1 // February in a non-leap year
+        }
+        else day2 += monthSizes[12]
+        month2--
+    }
+
+    if(month1 > month2){
+        month2 += 12
+        year2--
+    }
+
+    yearDifference = year2 - year1
+    dayDifference = day2 - day1
+    monthDifference = month2 - month1
+    if(monthDifference < 0){
+        monthDifference += 12
+        yearDifference--
+    }
+
+    return{
+        years: yearDifference,
+        months: monthDifference,
+        days: dayDifference
+    }
+}
+```
