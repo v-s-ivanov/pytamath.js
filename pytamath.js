@@ -14,7 +14,7 @@
  the following link:
  https://raw.githubusercontent.com/v-s-ivanov/pytamath.js/refs/heads/master/pytamath.js
 
- Version: 0.4.0-alpha
+ Version: 0.4.1-alpha
  Production-ready: No
 */
 
@@ -519,7 +519,7 @@ Pytamath.dateDifference = function(date1, date2, format = "dd/mm/yyyy"){
     const monthSizes = [0,31,29,31,30,31,30,31,31,30,31,30,31]
     let day1 = 0, month1 = 0, year1 = 0
     let day2 = 0, month2 = 0, year2 = 0
-    let yearDifference, dayDifference, monthDifference
+    let yearDifference, dayDifference, monthDifference, weekDifference
     
     date1 = date1.replace("30", "XXX")
     date1 = date1.replace("20", "XX")
@@ -632,6 +632,8 @@ Pytamath.dateDifference = function(date1, date2, format = "dd/mm/yyyy"){
     yearDifference = year2 - year1
     dayDifference = day2 - day1
     monthDifference = month2 - month1
+    weekDifference = Math.floor(dayDifference / 7)
+    dayDifference %= 7
     if(monthDifference < 0){
         monthDifference += 12
         yearDifference--
@@ -640,6 +642,7 @@ Pytamath.dateDifference = function(date1, date2, format = "dd/mm/yyyy"){
     return{
         years: yearDifference,
         months: monthDifference,
+        weeks: weekDifference,
         days: dayDifference
     }
 }

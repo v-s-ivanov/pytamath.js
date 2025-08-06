@@ -701,6 +701,7 @@ Pytamath.dateDifference() calculates the difference between two dates (with the 
 { // Example values
     years: 12,
     months: 7,
+    weeks: 0,
     days: 5
 }
 ```
@@ -718,7 +719,7 @@ Pytamath.dateDifference = function(date1, date2, format = "dd/mm/yyyy"){
     const monthSizes = [0,31,29,31,30,31,30,31,31,30,31,30,31]
     let day1 = 0, month1 = 0, year1 = 0
     let day2 = 0, month2 = 0, year2 = 0
-    let yearDifference, dayDifference, monthDifference
+    let yearDifference, dayDifference, monthDifference, weekDifference
     
     date1 = date1.replace("30", "XXX")
     date1 = date1.replace("20", "XX")
@@ -816,7 +817,7 @@ Pytamath.dateDifference = function(date1, date2, format = "dd/mm/yyyy"){
     if(day1 > day2){
         if(month2 != 1){
             day2 += monthSizes[month2 - 1]
-            if(!Pytamath.isLeapYear(year2) && month2 == 3)
+            if(!Pytamath.isLeapYear(year2) && month2 == 2)
                 day2 -= 1 // February in a non-leap year
         }
         else day2 += monthSizes[12]
@@ -831,6 +832,8 @@ Pytamath.dateDifference = function(date1, date2, format = "dd/mm/yyyy"){
     yearDifference = year2 - year1
     dayDifference = day2 - day1
     monthDifference = month2 - month1
+    weekDifference = Math.floor(dayDifference / 7)
+    dayDifference %= 7
     if(monthDifference < 0){
         monthDifference += 12
         yearDifference--
@@ -839,6 +842,7 @@ Pytamath.dateDifference = function(date1, date2, format = "dd/mm/yyyy"){
     return{
         years: yearDifference,
         months: monthDifference,
+        weeks: weekDifference,
         days: dayDifference
     }
 }
