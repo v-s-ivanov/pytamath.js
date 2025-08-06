@@ -644,7 +644,3 @@ Pytamath.dateDifference = function(date1, date2, format = "dd/mm/yyyy"){
         days: dayDifference
     }
 }
-
-console.log(Pytamath.dateDifference("29/07/1950", "08/02/2022", "dd/mm/yy"))
-=======
->>>>>>> 3510cd2d3ccbf1728dc86ec902bdeefa13c713fb
