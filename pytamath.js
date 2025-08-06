@@ -463,7 +463,6 @@ Pytamath.randomDate = function(leapYear = true, format = "dd/mm"){
             break;
     }
 }
-<<<<<<< HEAD
 
 Pytamath.randomTime = function(format = "hh:mm:ss"){
     format = format.toLowerCase()
