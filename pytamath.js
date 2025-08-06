@@ -469,6 +469,8 @@ Pytamath.randomTime = function(format = "hh:mm:ss"){
     format = format.toLowerCase()
     format = format.replace(" ", "")
 
+    format = format.replaceAll("i", "m")
+
     let dividingSign = format.replace("h", "")
     dividingSign = dividingSign.replace("h", "")
     dividingSign = dividingSign.replace("m", "")
