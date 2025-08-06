@@ -694,8 +694,59 @@ Pytamath.randomDateTime = function(leapYear = true, dateFormat = "dd/mm", timeFo
 }
 ```
 
+# Current Date
+With Pytamath.currentDate() you can check the current date and use it for other functions, such as Pytamath.dateDifference.
+
+```
+const date = new Date()
+Pytamath.currentDate = function(format = "dd/mm/yyyy"){
+    format = format.toLowerCase()
+    format = format.replace(" ", "")
+
+    let dividingSign = format.replaceAll("d", "")
+    dividingSign = dividingSign.replaceAll("m", "")
+    dividingSign = dividingSign.replaceAll("y", "")
+    dividingSign = dividingSign.replace(dividingSign[0], "")
+
+    let day = date.getDate()
+    let month = date.getMonth() + 1 // Months are 0-indexed in JavaScript
+    let year = date.getFullYear()
+    if(day < 10) day = `0${day}`
+    if(month < 10) month = `0${month}`
+    switch(format){
+        case "dd/mm/yyyy":
+            return `${day}/${month}/${year}`
+            break;
+        case "mm/dd/yyyy":
+            return `${month}/${day}/${year}`
+            break;
+        case "yyyy/mm/dd":
+            return `${year}/${month}/${day}`
+            break;
+        case "yyyy/dd/mm":
+            return `${year}/${day}/${month}`
+            break;
+        case "dd/mm/yy":
+            return `${day}/${month}/${year.toString().slice(-2)}`
+            break;
+        case "mm/dd/yy":
+            return `${month}/${day}/${year.toString().slice(-2)}`
+            break;
+        case "yy/mm/dd":
+            return `${year.toString().slice(-2)}/${month}/${day}`
+            break;
+        case "yy/dd/mm":
+            return `${year.toString().slice(-2)}/${day}/${month}`
+            break;
+        default:
+            return "Invalid date format, accepted values are 'dd/mm/yyyy', 'mm/dd/yyyy', 'yyyy/mm/dd', 'yyyy/dd/mm', 'dd/mm/yy', 'mm/dd/yy', 'yy/mm/dd', 'yy/dd/mm'"
+            break;
+    }
+}
+```
+
 # Date Difference
-Pytamath.dateDifference() calculates the difference between two dates (with the years as well). Leap years are also considered. The function returns the following object:
+Pytamath.dateDifference() calculates the difference between two dates (with the years as well). Leap years are also considered. If ```date2``` is left empty or is equal to "today", the difference between date1 and the current date will be calculated. The function returns the following object:
 
 ```
 { // Example values
@@ -709,12 +760,14 @@ Pytamath.dateDifference() calculates the difference between two dates (with the 
 Here is the code:
 
 ```
-Pytamath.dateDifference = function(date1, date2, format = "dd/mm/yyyy"){
+Pytamath.dateDifference = function(date1, date2 = "", format = "dd/mm/yyyy"){
     format = format.toLowerCase()
     format = format.replace(" ", "")
     format = format.replace("-", "/")
     format = format.replace(".", "/")
     format = format.replace("\\", "/")
+
+    if(date2 == "" || date2 == "today") date2 = Pytamath.currentDate(format)
 
     const monthSizes = [0,31,29,31,30,31,30,31,31,30,31,30,31]
     let day1 = 0, month1 = 0, year1 = 0
