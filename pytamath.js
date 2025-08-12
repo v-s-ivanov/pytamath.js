@@ -560,75 +560,70 @@ Pytamath.currentDate = function(format = "dd/mm/yyyy"){
 
 Pytamath.dateDifference = function(date1, date2 = "", format = "dd/mm/yyyy"){
     format = format.toLowerCase()
-    format = format.replace(" ", "")
-    format = format.replace("-", "/")
-    format = format.replace(".", "/")
-    format = format.replace("\\", "/")
+    format = format.replaceAll(" ", "")
+    format = format.replaceAll("-", "/")
+    format = format.replaceAll(".", "/")
+    format = format.replaceAll("\\", "/")
 
     if(date2 == "" || date2 == "today") date2 = Pytamath.currentDate(format)
 
     const monthSizes = [0,31,29,31,30,31,30,31,31,30,31,30,31]
     let day1 = 0, month1 = 0, year1 = 0
     let day2 = 0, month2 = 0, year2 = 0
-    let yearDifference, dayDifference, monthDifference, weekDifference
+    let yearDifference, dayDifference, monthDifference, weekDifference, totalDayDifference = 0
     
-    date1 = date1.replace("30", "XXX")
-    date1 = date1.replace("20", "XX")
-    date1 = date1.replace("10", "X")
-    date1 = date1.replace("0", "")
-    date1 = date1.replace("XXX", 30)
-    date1 = date1.replace("XX", 20)
-    date1 = date1.replace("X", 10)
+    date1 = date1.toLowerCase()
+    date1 = date1.replaceAll(" ", "")
+    date1 = date1.replaceAll("-", "/")
+    date1 = date1.replaceAll(".", "/")
+    date1 = date1.replaceAll("\\", "/")
 
-    
-    date2 = date2.replace("30", "XXX")
-    date2 = date2.replace("20", "XX")
-    date2 = date2.replace("10", "X")
-    date2 = date2.replace("0", "")
-    date2 = date2.replace("XXX", 30)
-    date2 = date2.replace("XX", 20)
-    date2 = date2.replace("X", 10)
+    date2 = date2.toLowerCase()
+    date2 = date2.replaceAll(" ", "")
+    date2 = date2.replaceAll("-", "/")
+    date2 = date2.replaceAll(".", "/")
+    date2 = date2.replaceAll("\\", "/")
 
     switch(format) {
         case "dd/mm/yyyy":
         case "dd/mm/yy":
-            day1 = parseInt(date1.split("/")[0]);
-            month1 = parseInt(date1.split("/")[1]);
+            day1 = date1.split("/")[0];
+            month1 = date1.split("/")[1];
             year1 = parseInt(date1.split("/")[2]);
 
-            day2 = parseInt(date2.split("/")[0]);
-            month2 = parseInt(date2.split("/")[1]);
+            day2 = date2.split("/")[0];
+            month2 = date2.split("/")[1];
             year2 = parseInt(date2.split("/")[2]);
             break;
         case "mm/dd/yyyy":
         case "mm/dd/yy":
-            month1 = parseInt(date1.split("/")[0]);
-            day1 = parseInt(date1.split("/")[1]);
+            month1 = date1.split("/")[0];
+            day1 = date1.split("/")[1];
             year1 = parseInt(date1.split("/")[2]);
 
-            month2 = parseInt(date2.split("/")[0]);
-            day2 = parseInt(date2.split("/")[1]);
+            month2 = date2.split("/")[0];
+            day2 = date2.split("/")[1];
             year2 = parseInt(date2.split("/")[2]);
             break;
         case "yyyy/mm/dd":
         case "yy/mm/dd":
             year1 = parseInt(date1.split("/")[0]);
-            month1 = parseInt(date1.split("/")[1]);
-            day1 = parseInt(date1.split("/")[2]);
+            month1 = date1.split("/")[1];
+            day1 = date1.split("/")[2];
 
             year2 = parseInt(date2.split("/")[0]);
-            month2 = parseInt(date2.split("/")[1]);
-            day2 = parseInt(date2.split("/")[2]);
+            month2 = date2.split("/")[1];
+            day2 = date2.split("/")[2];
             break;
         case "yyyy/dd/mm":
         case "yy/dd/mm":
             year1 = parseInt(date1.split("/")[0]);
-            day1 = parseInt(date1.split("/")[1]);
-            month1 = parseInt(date1.split("/")[2]);
+            day1 = date1.split("/")[1];
+            month1 = date1.split("/")[2];
 
             year2 = parseInt(date2.split("/")[0]);
-            day2 = parseInt(date2.split("/")[1]);
-            month2 = parseInt(date2.split("/")[2]);
+            day2 = date2.split("/")[1];
+            month2 = date2.split("/")[2];
             break;
         default:
             return "Invalid date format, accepted values are 'dd/mm/yyyy', 'mm/dd/yyyy', 'yyyy/mm/dd', 'yyyy/mm/yy', 'yyyy/dd/mm'"
@@ -639,6 +634,36 @@ Pytamath.dateDifference = function(date1, date2 = "", format = "dd/mm/yyyy"){
     format = format.replace("yyyy", "yy")
     format = format.replace("yy/", "")
     format = format.replace("/yy", "")
+
+
+    day1 = day1.replaceAll("30", "XXX")
+    day1 = day1.replaceAll("20", "XX")
+    day1 = day1.replaceAll("10", "X")
+    day1 = day1.replaceAll("0", "")
+    day1 = day1.replaceAll("XXX", 30)
+    day1 = day1.replaceAll("XX", 20)
+    day1 = day1.replaceAll("X", 10)
+
+    month1 = month1.replaceAll("10", "X")
+    month1 = month1.replaceAll("0", "")
+    month1 = month1.replaceAll("X", 10)
+
+    day2 = day2.replaceAll("30", "XXX")
+    day2 = day2.replaceAll("20", "XX")
+    day2 = day2.replaceAll("10", "X")
+    day2 = day2.replaceAll("0", "")
+    day2 = day2.replaceAll("XXX", 30)
+    day2 = day2.replaceAll("XX", 20)
+    day2 = day2.replaceAll("X", 10)
+
+    month2 = month2.replaceAll("10", "X")
+    month2 = month2.replaceAll("0", "")
+    month2 = month2.replaceAll("X", 10)
+
+    month1 = parseInt(month1)
+    month2 = parseInt(month2)
+    day1 = parseInt(day1)
+    day2 = parseInt(day2)
 
     if(year1 > year2){
         const temp = day1
@@ -680,6 +705,14 @@ Pytamath.dateDifference = function(date1, date2 = "", format = "dd/mm/yyyy"){
         year2--
     }
 
+    for(let i = year1; i < year2; i++){
+        if(Pytamath.isLeapYear(i)) totalDayDifference += 366
+        else totalDayDifference += 365
+    }
+
+    totalDayDifference -= ((Pytamath.isLeapYear(year1) ? 366 : 365) - Pytamath.dayOfYear(`${day1}/${month1}`, Pytamath.isLeapYear(year1), format))
+    totalDayDifference += Pytamath.dayOfYear(`${day2}/${month2}`, Pytamath.isLeapYear(year2), format)
+
     yearDifference = year2 - year1
     dayDifference = day2 - day1
     monthDifference = month2 - month1
@@ -694,6 +727,7 @@ Pytamath.dateDifference = function(date1, date2 = "", format = "dd/mm/yyyy"){
         years: yearDifference,
         months: monthDifference,
         weeks: weekDifference,
-        days: dayDifference
+        days: dayDifference,
+        totalDays: totalDayDifference
     }
 }
