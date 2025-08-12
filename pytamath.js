@@ -14,7 +14,7 @@
  the following link:
  https://raw.githubusercontent.com/v-s-ivanov/pytamath.js/refs/heads/master/pytamath.js
 
- Version: 0.4.2-alpha
+ Version: 0.5.0-alpha
  Production-ready: No
 */
 
