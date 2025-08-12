@@ -436,11 +436,8 @@ Pytamath.randomDate = function(leapYear = true, format = "dd/mm"){
     format = format.replace(" ", "")
 
     let dividingSign = format
-    dividingSign = dividingSign.replace("d", "")
-    dividingSign = dividingSign.replace("d", "")
-    dividingSign = dividingSign.replace("m", "")
-    dividingSign = dividingSign.replace("m", "")
-    dividingSign = dividingSign.replace(dividingSign[0], "")
+    dividingSign = dividingSign.replaceAll("d", "")
+    dividingSign = dividingSign.replaceAll("m", "")
 
     format = format.replace("-", "/")
     format = format.replace(".", "/")
@@ -471,16 +468,17 @@ Pytamath.randomTime = function(format = "hh:mm:ss"){
 
     format = format.replaceAll("i", "m")
 
-    let dividingSign = format.replace("h", "")
-    dividingSign = dividingSign.replace("h", "")
-    dividingSign = dividingSign.replace("m", "")
-    dividingSign = dividingSign.replace("m", "")
-    dividingSign = dividingSign.replace("s", "")
-    dividingSign = dividingSign.replace("s", "")
+    let dividingSign = format.replaceAll("h", "")
+    dividingSign = dividingSign.replaceAll("m", "")
+    dividingSign = dividingSign.replaceAll("s", "")
 
     format = format.replace("-", ":")
     format = format.replace(".", ":")
     format = format.replace("\\", ":")
+
+    if(dividingSign.length > 1){
+        dividingSign = dividingSign[0]
+    }
 
     let hours = Pytamath.random(0, 23)
     let minutes = Pytamath.random(0, 59)
@@ -529,28 +527,28 @@ Pytamath.currentDate = function(format = "dd/mm/yyyy"){
     if(month < 10) month = `0${month}`
     switch(format){
         case "dd/mm/yyyy":
-            return `${day}/${month}/${year}`
+            return `${day}${dividingSign}${month}${dividingSign}${year}`
             break;
         case "mm/dd/yyyy":
-            return `${month}/${day}/${year}`
+            return `${month}${dividingSign}${day}${dividingSign}${year}`
             break;
         case "yyyy/mm/dd":
-            return `${year}/${month}/${day}`
+            return `${year}${dividingSign}${month}${dividingSign}${day}`
             break;
         case "yyyy/dd/mm":
-            return `${year}/${day}/${month}`
+            return `${year}${dividingSign}${day}${dividingSign}${month}`
             break;
         case "dd/mm/yy":
-            return `${day}/${month}/${year.toString().slice(-2)}`
+            return `${day}${dividingSign}${month}${dividingSign}${year.toString().slice(-2)}`
             break;
         case "mm/dd/yy":
-            return `${month}/${day}/${year.toString().slice(-2)}`
+            return `${month}${dividingSign}${day}${dividingSign}${year.toString().slice(-2)}`
             break;
         case "yy/mm/dd":
-            return `${year.toString().slice(-2)}/${month}/${day}`
+            return `${year.toString().slice(-2)}${dividingSign}${month}${dividingSign}${day}`
             break;
         case "yy/dd/mm":
-            return `${year.toString().slice(-2)}/${day}/${month}`
+            return `${year.toString().slice(-2)}${dividingSign}${day}${dividingSign}${month}`
             break;
         default:
             return "Invalid date format, accepted values are 'dd/mm/yyyy', 'mm/dd/yyyy', 'yyyy/mm/dd', 'yyyy/dd/mm', 'dd/mm/yy', 'mm/dd/yy', 'yy/mm/dd', 'yy/dd/mm'"
