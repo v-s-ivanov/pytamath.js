@@ -936,3 +936,175 @@ Pytamath.dateDifference = function(date1, date2 = "", format = "dd/mm/yyyy"){
     }
 }
 ```
+
+# Finding An Element Of The Periodic Table By Its Sign
+The ```Pytamath.PeriodicTable``` array contains 1 null value and 118 objects - one for each element of the Periodic table. Each object contains these elements: sign, name, atomicWeight, group and period.
+<br>
+The ```Pytamath.findElementBySign()``` function finds an element by looping through all of the objects in the array and checking if the ```sign``` element is equal to the ```sign``` parameter. Values are <b>NOT</b> case-sensitive.
+```
+Pytamath.findElementBySign = function(sign = "H"){
+    sign = sign.toLowerCase()
+    sign = sign.replace(" ", "")
+
+    for(let i = 1; i < Pytamath.PeriodicTable.length; i++){
+        if(Pytamath.PeriodicTable[i].sign == sign){
+            return{
+                number: i,
+                name: Pytamath.PeriodicTable[i].name,
+                atomicWeight: Pytamath.PeriodicTable[i].atomicWeight,
+                group: Pytamath.PeriodicTable[i].group,
+                period: Pytamath.PeriodicTable[i].period
+            }
+            break;
+        }
+    }
+}
+```
+Here is an example usage:<br>
+Code:
+```
+console.log(Pytamath.findElementBySign("H"));
+```
+Console:
+```
+{
+    number: 1, 
+    name: "Hydrogen", 
+    atomicWeight: 1.008, 
+    group: 1, 
+    period: 1
+}
+```
+
+# Finding An Element of The Periodic Table By Its Atomic Number
+The function ```Pytamath.findElementByNumber()``` returns the element of the array with the provided index:
+
+```
+Pytamath.findElementByNumber = function(number = 1){
+    if(number >= 0 && number < Pytamath.PeriodicTable.length) return Pytamath.PeriodicTable[number];
+    else return null; // If the number is out of bounds, return null
+} 
+```
+
+Example usage: <br>
+Code:
+```
+console.log(Pytamath.findElementByNumber(1));
+```
+Console:
+```
+{
+    sign: "h", 
+    name: "Hydrogen", 
+    atomicWeight: 1.008, 
+    group: 1, 
+    period: 1
+}
+```
+
+# Finding Elements By Their Group:
+```Pytamath.findElementsByGroup()``` will return all of the chemical elements which are part of the provided group. Note that while the value may be an integer, it can also be ```"lanthanoid"``` or ```"actinoid"```, depending on which elements you want.
+```
+Pytamath.findElementsByGroup = function(group = 1){
+    if(!Pytamath.isNumber(group)){
+        group = group.toLowerCase()
+        group = group.replace(" ", "")
+    }
+
+    const elements = []
+    for(let i = 1; i < Pytamath.PeriodicTable.length; i++){
+        if(Pytamath.PeriodicTable[i].group == group){
+            elements.push({
+                number: i,
+                sign: Pytamath.PeriodicTable[i].sign,
+                name: Pytamath.PeriodicTable[i].name,
+                atomicWeight: Pytamath.PeriodicTable[i].atomicWeight,
+                period: Pytamath.PeriodicTable[i].period
+            })
+        }
+    }
+    return elements;
+}
+```
+
+Example usage:<br>
+Code:
+```
+console.log(Pytamath.findElementsByGroup(1));
+```
+Console:
+```
+[
+    {number: 1, sign: "h", name: "Hydrogen", atomicWeight: 1.008, period: 1},
+    {number: 3, sign: "li", name: "Lithium", atomicWeight: 6.94, period: 2},
+    {number: 11, sign: "na", name: "Sodium", atomicWeight: 22.99, period: 3},
+    {number: 19, sign: "k", name: "Potassium", atomicWeight: 39.098, period: 4},
+    {number: 37, sign: "rb", name: "Rubidium", atomicWeight: 85.468, period: 5},
+    {number: 55, sign: "cs", name: "Cesium", atomicWeight: 132.91, period: 6},
+    {number: 87, sign: "fr", name: "Francium", atomicWeight: 223, period: 7}
+]
+```
+
+# Finding Elements By Their Period:
+```Pytamath.findElementsByPeriod()``` will return all of the chemical elements which are part of the provided period:
+```
+Pytamath.findElementsByPeriod = function(period = 1){
+    const elements = []
+    for(let i = 1; i < Pytamath.PeriodicTable.length; i++){
+        if(Pytamath.PeriodicTable[i].period == period){
+            elements.push({
+                number: i,
+                sign: Pytamath.PeriodicTable[i].sign,
+                name: Pytamath.PeriodicTable[i].name,
+                atomicWeight: Pytamath.PeriodicTable[i].atomicWeight,
+                group: Pytamath.PeriodicTable[i].group
+            })
+        }
+    }
+    return elements;
+}
+```
+Example usage: <br>
+Code:
+```
+console.log(Pytamath.findElementsByPeriod(1));
+```
+Console:
+```
+[
+    {number: 1, sign: "h", name: "Hydrogen", atomicWeight: 1.008, group: 1},
+    {number: 2, sign: "he", name: "Helium", atomicWeight: 4.0026, group: 18}
+]
+```
+
+# Random Element
+```Pytamath.randomElement()``` returns an element within the provided range:
+```
+Pytamath.randomElement = function(min = 1, max = Pytamath.PeriodicTable.length - 1){
+    const i = Pytamath.random(min, max)
+    return{
+        number: i,
+        sign: Pytamath.PeriodicTable[i].sign,
+        name: Pytamath.PeriodicTable[i].name,
+        atomicWeight: Pytamath.PeriodicTable[i].atomicWeight,
+        group: Pytamath.PeriodicTable[i].group,
+        period: Pytamath.PeriodicTable[i].period
+    };
+}
+```
+Example usage: <br>
+Code:
+```
+console.log(Pytamath.randomElement(1, 20));
+```
+Console:
+```
+{ // Example Random Values
+    number: 12, 
+    sign: "mg", 
+    name: "Magnesium", 
+    atomicWeight: 24.305, 
+    group: 2, 
+    period: 3
+}
+```

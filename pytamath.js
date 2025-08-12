@@ -729,3 +729,197 @@ Pytamath.dateDifference = function(date1, date2 = "", format = "dd/mm/yyyy"){
         totalDays: totalDayDifference
     }
 }
+
+Pytamath.PeriodicTable = [
+    null,
+    { sign: "h",  name: "Hydrogen",     atomicWeight: 1.008,    group: 1,  period: 1 },
+    { sign: "he", name: "Helium",       atomicWeight: 4.0026,   group: 18, period: 1 },
+    { sign: "li", name: "Lithium",      atomicWeight: 6.94,     group: 1,  period: 2 },
+    { sign: "be", name: "Beryllium",    atomicWeight: 9.0122,   group: 2,  period: 2 },
+    { sign: "b",  name: "Boron",        atomicWeight: 10.81,    group: 13, period: 2 },
+    { sign: "c",  name: "Carbon",       atomicWeight: 12.011,   group: 14, period: 2 },
+    { sign: "n",  name: "Nitrogen",     atomicWeight: 14.007,   group: 15, period: 2 },
+    { sign: "o",  name: "Oxygen",       atomicWeight: 15.999,   group: 16, period: 2 },
+    { sign: "f",  name: "Fluorine",     atomicWeight: 18.998,   group: 17, period: 2 },
+    { sign: "ne", name: "Neon",         atomicWeight: 20.180,   group: 18, period: 2 },
+    { sign: "na", name: "Sodium",       atomicWeight: 22.990,   group: 1,  period: 3 },
+    { sign: "mg", name: "Magnesium",    atomicWeight: 24.305,   group: 2,  period: 3 },
+    { sign: "al", name: "Aluminum",     atomicWeight: 26.982,   group: 13, period: 3 },
+    { sign: "si", name: "Silicon",      atomicWeight: 28.085,   group: 14, period: 3 },
+    { sign: "p",  name: "Phosphorus",   atomicWeight: 30.974,   group: 15, period: 3 },
+    { sign: "s",  name: "Sulfur",       atomicWeight: 32.06,    group: 16, period: 3 },
+    { sign: "cl", name: "Chlorine",     atomicWeight: 35.45,    group: 17, period: 3 },
+    { sign: "ar", name: "Argon",        atomicWeight: 39.948,   group: 18, period: 3 },
+    { sign: "k",  name: "Potassium",    atomicWeight: 39.098,   group: 1,  period: 4 },
+    { sign: "ca", name: "Calcium",      atomicWeight: 40.078,   group: 2,  period: 4 },
+    { sign: "sc", name: "Scandium",     atomicWeight: 44.956,   group: 3,  period: 4 },
+    { sign: "ti", name: "Titanium",     atomicWeight: 47.867,   group: 4,  period: 4 },
+    { sign: "v",  name: "Vanadium",     atomicWeight: 50.942,   group: 5,  period: 4 },
+    { sign: "cr", name: "Chromium",     atomicWeight: 51.996,   group: 6,  period: 4 },
+    { sign: "mn", name: "Manganese",    atomicWeight: 54.938,   group: 7,  period: 4 },
+    { sign: "fe", name: "Iron",         atomicWeight: 55.845,   group: 8,  period: 4 },
+    { sign: "co", name: "Cobalt",       atomicWeight: 58.933,   group: 9,  period: 4 },
+    { sign: "ni", name: "Nickel",       atomicWeight: 58.693,   group: 10, period: 4 },
+    { sign: "cu", name: "Copper",       atomicWeight: 63.546,   group: 11, period: 4 },
+    { sign: "zn", name: "Zinc",         atomicWeight: 65.38,    group: 12, period: 4 },
+    { sign: "ga", name: "Gallium",      atomicWeight: 69.723,   group: 13, period: 4 },
+    { sign: "ge", name: "Germanium",    atomicWeight: 72.630,   group: 14, period: 4 },
+    { sign: "as", name: "Arsenic",      atomicWeight: 74.922,   group: 15, period: 4 },
+    { sign: "se", name: "Selenium",     atomicWeight: 78.971,   group: 16, period: 4 },
+    { sign: "br", name: "Bromine",      atomicWeight: 79.904,   group: 17, period: 4 },
+    { sign: "kr", name: "Krypton",      atomicWeight: 83.798,   group: 18, period: 4 },
+    { sign: "rb", name: "Rubidium",     atomicWeight: 85.468,   group: 1,  period: 5 },
+    { sign: "sr", name: "Strontium",    atomicWeight: 87.62,    group: 2,  period: 5 },
+    { sign: "y",  name: "Yttrium",      atomicWeight: 88.906,   group: 3,  period: 5 },
+    { sign: "zr", name: "Zirconium",    atomicWeight: 91.224,   group: 4,  period: 5 },
+    { sign: "nb", name: "Niobium",      atomicWeight: 92.906,   group: 5,  period: 5 },
+    { sign: "mo", name: "Molybdenum",   atomicWeight: 95.95,    group: 6,  period: 5 },
+    { sign: "tc", name: "Technetium",   atomicWeight: 98,       group: 7,  period: 5 },
+    { sign: "ru", name: "Ruthenium",    atomicWeight: 101.07,   group: 8,  period: 5 },
+    { sign: "rh", name: "Rhodium",      atomicWeight: 102.91,   group: 9,  period: 5 },
+    { sign: "pd", name: "Palladium",    atomicWeight: 106.42,   group: 10, period: 5 },
+    { sign: "ag", name: "Silver",       atomicWeight: 107.87,   group: 11, period: 5 },
+    { sign: "cd", name: "Cadmium",      atomicWeight: 112.41,   group: 12, period: 5 },
+    { sign: "in", name: "Indium",       atomicWeight: 114.82,   group: 13, period: 5 },
+    { sign: "sn", name: "Tin",          atomicWeight: 118.71,   group: 14, period: 5 },
+    { sign: "sb", name: "Antimony",     atomicWeight: 121.76,   group: 15, period: 5 },
+    { sign: "te", name: "Tellurium",    atomicWeight: 127.60,   group: 16, period: 5 },
+    { sign: "i",  name: "Iodine",       atomicWeight: 126.90,   group: 17, period: 5 },
+    { sign: "xe", name: "Xenon",        atomicWeight: 131.29,   group: 18, period: 5 },
+    { sign: "cs", name: "Cesium",       atomicWeight: 132.91,   group: 1,  period: 6 },
+    { sign: "ba", name: "Barium",       atomicWeight: 137.33,   group: 2,  period: 6 },
+    { sign: "la", name: "Lanthanum",    atomicWeight: 138.91,   group: 3,  period: 6 },
+    { sign: "ce", name: "Cerium",       atomicWeight: 140.12,   group: "lanthanoid", period: 6 },
+    { sign: "pr", name: "Praseodymium", atomicWeight: 140.91,   group: "lanthanoid", period: 6 },
+    { sign: "nd", name: "Neodymium",    atomicWeight: 144.24,   group: "lanthanoid", period: 6 },
+    { sign: "pm", name: "Promethium",   atomicWeight: 145,      group: "lanthanoid", period: 6 },
+    { sign: "sm", name: "Samarium",     atomicWeight: 150.36,   group: "lanthanoid", period: 6 },
+    { sign: "eu", name: "Europium",     atomicWeight: 151.96,   group: "lanthanoid", period: 6 },
+    { sign: "gd", name: "Gadolinium",   atomicWeight: 157.25,   group: "lanthanoid", period: 6 },
+    { sign: "tb", name: "Terbium",      atomicWeight: 158.93,   group: "lanthanoid", period: 6 },
+    { sign: "dy", name: "Dysprosium",   atomicWeight: 162.50,   group: "lanthanoid", period: 6 },
+    { sign: "ho", name: "Holmium",      atomicWeight: 164.93,   group: "lanthanoid", period: 6 },
+    { sign: "er", name: "Erbium",       atomicWeight: 167.26,   group: "lanthanoid", period: 6 },
+    { sign: "tm", name: "Thulium",      atomicWeight: 168.93,   group: "lanthanoid", period: 6 },
+    { sign: "yb", name: "Ytterbium",    atomicWeight: 173.05,   group: "lanthanoid", period: 6 },
+    { sign: "lu", name: "Lutetium",     atomicWeight: 174.97,   group: 3,  period: 6 },
+    { sign: "hf", name: "Hafnium",      atomicWeight: 178.49,   group: 4,  period: 6 },
+    { sign: "ta", name: "Tantalum",     atomicWeight: 180.95,   group: 5,  period: 6 },
+    { sign: "w",  name: "Tungsten",     atomicWeight: 183.84,   group: 6,  period: 6 },
+    { sign: "re", name: "Rhenium",      atomicWeight: 186.21,   group: 7,  period: 6 },
+    { sign: "os", name: "Osmium",       atomicWeight: 190.23,   group: 8,  period: 6 },
+    { sign: "ir", name: "Iridium",      atomicWeight: 192.22,   group: 9,  period: 6 },
+    { sign: "pt", name: "Platinum",     atomicWeight: 195.08,   group: 10, period: 6 },
+    { sign: "au", name: "Gold",         atomicWeight: 196.97,   group: 11, period: 6 },
+    { sign: "hg", name: "Mercury",      atomicWeight: 200.59,   group: 12, period: 6 },
+    { sign: "tl", name: "Thallium",     atomicWeight: 204.38,   group: 13, period: 6 },
+    { sign: "pb", name: "Lead",         atomicWeight: 207.2,    group: 14, period: 6 },
+    { sign: "bi", name: "Bismuth",      atomicWeight: 208.98,   group: 15, period: 6 },
+    { sign: "po", name: "Polonium",     atomicWeight: 209,      group: 16, period: 6 },
+    { sign: "at", name: "Astatine",     atomicWeight: 210,      group: 17, period: 6 },
+    { sign: "rn", name: "Radon",        atomicWeight: 222,      group: 18, period: 6 },
+    { sign: "fr", name: "Francium",     atomicWeight: 223,      group: 1,  period: 7 },
+    { sign: "ra", name: "Radium",       atomicWeight: 226,      group: 2,  period: 7 },
+    { sign: "ac", name: "Actinium",     atomicWeight: 227,      group: 3,  period: 7 },
+    { sign: "th", name: "Thorium",      atomicWeight: 232.04,   group: "actinoid", period: 7 },
+    { sign: "pa", name: "Protactinium", atomicWeight: 231.04,   group: "actinoid", period: 7 },
+    { sign: "u",  name: "Uranium",      atomicWeight: 238.03,   group: "actinoid", period: 7 },
+    { sign: "np", name: "Neptunium",    atomicWeight: 237,      group: "actinoid", period: 7 },
+    { sign: "pu", name: "Plutonium",    atomicWeight: 244,      group: "actinoid", period: 7 },
+    { sign: "am", name: "Americium",    atomicWeight: 243,      group: "actinoid", period: 7 },
+    { sign: "cm", name: "Curium",       atomicWeight: 247,      group: "actinoid", period: 7 },
+    { sign: "bk", name: "Berkelium",    atomicWeight: 247,      group: "actinoid", period: 7 },
+    { sign: "cf", name: "Californium",  atomicWeight: 251,      group: "actinoid", period: 7 },
+    { sign: "es", name: "Einsteinium",  atomicWeight: 252,      group: "actinoid", period: 7 },
+    { sign: "fm", name: "Fermium",      atomicWeight: 257,      group: "actinoid", period: 7 },
+    { sign: "md", name: "Mendelevium",  atomicWeight: 258,      group: "actinoid", period: 7 },
+    { sign: "no", name: "Nobelium",     atomicWeight: 259,      group: "actinoid", period: 7 },
+    { sign: "lr", name: "Lawrencium",   atomicWeight: 266,      group: 3,  period: 7 },
+    { sign: "rf", name: "Rutherfordium",atomicWeight: 267,      group: 4,  period: 7 },
+    { sign: "db", name: "Dubnium",      atomicWeight: 270,      group: 5,  period: 7 },
+    { sign: "sg", name: "Seaborgium",   atomicWeight: 271,      group: 6,  period: 7 },
+    { sign: "bh", name: "Bohrium",      atomicWeight: 270,      group: 7,  period: 7 },
+    { sign: "hs", name: "Hassium",      atomicWeight: 277,      group: 8,  period: 7 },
+    { sign: "mt", name: "Meitnerium",   atomicWeight: 278,      group: 9,  period: 7 },
+    { sign: "ds", name: "Darmstadtium", atomicWeight: 281,      group: 10, period: 7 },
+    { sign: "rg", name: "Roentgenium",  atomicWeight: 282,      group: 11, period: 7 },
+    { sign: "cn", name: "Copernicium",  atomicWeight: 285,      group: 12, period: 7 },
+    { sign: "nh", name: "Nihonium",     atomicWeight: 286,      group: 13, period: 7 },
+    { sign: "fl", name: "Flerovium",    atomicWeight: 289,      group: 14, period: 7 },
+    { sign: "mc", name: "Moscovium",    atomicWeight: 290,      group: 15, period: 7 },
+    { sign: "lv", name: "Livermorium",  atomicWeight: 293,      group: 16, period: 7 },
+    { sign: "ts", name: "Tennessine",   atomicWeight: 294,      group: 17, period: 7 },
+    { sign: "og", name: "Oganesson",    atomicWeight: 294,      group: 18, period: 7 }
+]
+
+Pytamath.findElementBySign = function(sign = "H"){
+    sign = sign.toLowerCase()
+    sign = sign.replace(" ", "")
+
+    for(let i = 1; i < Pytamath.PeriodicTable.length; i++){
+        if(Pytamath.PeriodicTable[i].sign == sign){
+            return{
+                number: i,
+                name: Pytamath.PeriodicTable[i].name,
+                atomicWeight: Pytamath.PeriodicTable[i].atomicWeight,
+                group: Pytamath.PeriodicTable[i].group,
+                period: Pytamath.PeriodicTable[i].period
+            }
+            break;
+        }
+    }
+}
+
+Pytamath.findElementByNumber = function(number = 1){
+    if(number >= 0 && number < Pytamath.PeriodicTable.length) return Pytamath.PeriodicTable[number];
+    else return null; // If the number is out of bounds, return null
+}
+
+Pytamath.findElementsByGroup = function(group = 1){
+    if(!Pytamath.isNumber(group)){
+        group = group.toLowerCase()
+        group = group.replace(" ", "")
+    }
+
+    const elements = []
+    for(let i = 1; i < Pytamath.PeriodicTable.length; i++){
+        if(Pytamath.PeriodicTable[i].group == group){
+            elements.push({
+                number: i,
+                sign: Pytamath.PeriodicTable[i].sign,
+                name: Pytamath.PeriodicTable[i].name,
+                atomicWeight: Pytamath.PeriodicTable[i].atomicWeight,
+                period: Pytamath.PeriodicTable[i].period
+            })
+        }
+    }
+    return elements;
+}
+
+Pytamath.findElementsByPeriod = function(period = 1){
+    const elements = []
+    for(let i = 1; i < Pytamath.PeriodicTable.length; i++){
+        if(Pytamath.PeriodicTable[i].period == period){
+            elements.push({
+                number: i,
+                sign: Pytamath.PeriodicTable[i].sign,
+                name: Pytamath.PeriodicTable[i].name,
+                atomicWeight: Pytamath.PeriodicTable[i].atomicWeight,
+                group: Pytamath.PeriodicTable[i].group
+            })
+        }
+    }
+    return elements;
+}
+
+Pytamath.randomElement = function(min = 1, max = Pytamath.PeriodicTable.length - 1){
+    const i = Pytamath.random(min, max)
+    return{
+        number: i,
+        sign: Pytamath.PeriodicTable[i].sign,
+        name: Pytamath.PeriodicTable[i].name,
+        atomicWeight: Pytamath.PeriodicTable[i].atomicWeight,
+        group: Pytamath.PeriodicTable[i].group,
+        period: Pytamath.PeriodicTable[i].period
+    };
+}
