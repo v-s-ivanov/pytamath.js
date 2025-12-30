@@ -14,7 +14,7 @@
  the following link:
  https://raw.githubusercontent.com/v-s-ivanov/pytamath.js/refs/heads/master/pytamath.js
 
- Version: 0.5.0-alpha
+ Version: 1.0.0-beta
  Production-ready: No
 */
 
@@ -132,6 +132,14 @@ Pytamath.biquadraticEquation = function(a,b,c, rule = ""){ // ax^4 + bx^2 + c = 
     }
     if(results.length == 0) return [null]
     else return results
+}
+
+Pytamath.pyTheorem = function(leg1 = 0, leg2 = 0){
+    return Math.sqrt(Math.pow(leg1, 2) + Math.pow(leg2, 2))
+}
+
+Pytamath.reversePyTheorem = function(leg, hypotenuse){
+    return Math.sqrt(Math.pow(hypotenuse, 2) - Math.pow(leg, 2))
 }
 
 Pytamath.isNumber = function(value) { // Checks if a value is a number by multiplying it by 1
@@ -870,6 +878,23 @@ Pytamath.findElementBySign = function(sign = "H"){
     }
 }
 
+Pytamath.findElementByName = function(name = "Hydrogen"){
+    name = name.toLowerCase
+    name = name.replace(" ", "")
+
+    for(let i = 1; i < Pytamath.PeriodicTable.length; i++){
+        if(Pytamath.PeriodicTable[i].name.toLowerCase == name){
+            return{
+                number: i,
+                name: Pytamath.PeriodicTable[i].name,
+                atomicWeight: Pytamath.PeriodicTable[i].atomicWeight,
+                group: Pytamath.PeriodicTable[i].group,
+                period: Pytamath.PeriodicTable[i].period
+            }
+        }
+    }
+}
+
 Pytamath.findElementByNumber = function(number = 1){
     if(number >= 0 && number < Pytamath.PeriodicTable.length) return Pytamath.PeriodicTable[number];
     else return null; // If the number is out of bounds, return null
@@ -922,4 +947,12 @@ Pytamath.randomElement = function(min = 1, max = Pytamath.PeriodicTable.length -
         group: Pytamath.PeriodicTable[i].group,
         period: Pytamath.PeriodicTable[i].period
     };
+}
+
+Pytamath.bgnToEur = function(bgn){
+    return this.roundNum(bgn/1.95583, 2)
+}
+
+Pytamath.eurToBgn = function(eur){
+    return this.roundNum(eur*1.95583, 2)
 }
