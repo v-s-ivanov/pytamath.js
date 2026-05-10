@@ -1108,3 +1108,62 @@ Console:
     period: 3
 }
 ```
+
+# Bulgarian Lev and Euro Converters
+```Pytamath.bgnToEur(bgn)``` and ```Pytamath.eurToBgn(eur)``` can be used to
+convert Lev to Euro and Euro to Lev respectively. This is to help with the
+currency switch in Bulgaria in 2026. The fixed exchange rate is:
+1 EUR = 1.95583 BGN
+
+```
+Pytamath.bgnToEur = function(bgn){
+    return this.roundNum(bgn/1.95583, 2)
+}
+
+Pytamath.eurToBgn = function(eur){
+    return this.roundNum(eur*1.95583, 2)
+}
+```
+
+# Cows and Bulls
+Cows and Bulls is a game where you have to guess a number with a certain
+amount of digits, for example, 4. When you make a guess, you receive a
+hint: the amount of cows and bulls. Bulls are the digits that are in the
+same position as guessed, while cows are the digits that are included in
+the number, but in a different position. You don't know which digit is a
+cow and which one is a bull, you only know the amount of cows and bulls.
+For example, if the number is 4785 and you guess 6784, you have 2 bulls
+(7 and 8) and 1 cow (4).
+```Pytamath.cowsAndBulls(correctNumber, guessedNumber)``` brings this
+game to JavaScript. 
+Return the cows and bulls as an objectReturn the cows and bulls as an object
+```
+Pytamath.cowsAndBulls = function(correctNumber, guessedNumber){
+    const correctNumberStr = correctNumber.toString() 
+    const guessedNumberStr = guessedNumber.toString()
+
+    if(correctNumberStr.length != guessedNumberStr.length) return "The numbers must have the same number of digits"
+
+    let cows = 0, bulls = 0
+    for(let i = 0; i < correctNumberStr.length; i++){
+        if(guessedNumberStr[i] == correctNumberStr[i]) bulls++
+        else if(correctNumberStr.includes(guessedNumberStr[i])) cows++
+    }
+    return{
+        cows: cows,
+        bulls: bulls
+    }
+}
+```
+
+When you enter a correct number and a guess in an
+integer format, the function will return an object containing the number
+of cows and bulls. An example return value would be:
+```console.log(Pytamath.cowsAndBulls(3769, 7041))```
+Output:
+```
+{
+    cows: 1,
+    bulls: 0
+}
+```

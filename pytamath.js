@@ -14,7 +14,7 @@
  the following link:
  https://raw.githubusercontent.com/v-s-ivanov/pytamath.js/refs/heads/master/pytamath.js
 
- Version: 1.0.0-beta
+ Version: 0.6.0-beta
  Production-ready: No
 */
 
@@ -949,27 +949,35 @@ Pytamath.randomElement = function(min = 1, max = Pytamath.PeriodicTable.length -
     };
 }
 
-Pytamath.bgnToEur = function(bgn){
+Pytamath.bgnToEur = function(bgn){ // Convert Bulgarian Lev to Euro, the exchange rate is 1 Euro = 1.95583 BGN
     return this.roundNum(bgn/1.95583, 2)
 }
 
-Pytamath.eurToBgn = function(eur){
+Pytamath.eurToBgn = function(eur){ // Convert Euro to Bulgarian Lev, the exchange rate is 1 Euro = 1.95583 BGN
     return this.roundNum(eur*1.95583, 2)
 }
 
-Pytamath.cowAndBull = function(correctNumber, guessedNumber){
-    const correctNumberStr = correctNumber.toString()
+Pytamath.cowsAndBulls = function(correctNumber, guessedNumber){ // The game of Cows And Bulls
+    // You guess a number and you get a hint saying how many cows and bulls you have.
+    // Cows are the digits that are in the correct number but in the wrong position
+    // Bulls are the digits that are in the correct number and in the correct position.
+    const correctNumberStr = correctNumber.toString() 
     const guessedNumberStr = guessedNumber.toString()
 
+    // If the numbers don't have the same number of digits, return an error message
     if(correctNumberStr.length != guessedNumberStr.length) return "The numbers must have the same number of digits"
 
-    let cows = 0, bulls = 0
-    for(let i = 0; i < correctNumberStr.length; i++){
-        if(guessedNumberStr[i] == correctNumberStr[i]) bulls++
-        else if(correctNumberStr.includes(guessedNumberStr[i])) cows++
+    let cows = 0, bulls = 0 // Initialize cows and bulls to 0
+    for(let i = 0; i < correctNumberStr.length; i++){ // Loop through the digits of the numbers
+        if(guessedNumberStr[i] == correctNumberStr[i]) bulls++ // Find bulls
+        else if(correctNumberStr.includes(guessedNumberStr[i])) cows++ // Find cows
     }
-    return{
+    return{ // Return the cows and bulls as an object
         cows: cows,
         bulls: bulls
     }
+
+    // The result can be used like this:
+    // const result = Pytamath.cowsAndBulls(1234, 4321)
+    // console.log(`Cows: ${result.cows}, Bulls: ${result.bulls}`)
 }
