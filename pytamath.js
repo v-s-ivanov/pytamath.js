@@ -956,3 +956,20 @@ Pytamath.bgnToEur = function(bgn){
 Pytamath.eurToBgn = function(eur){
     return this.roundNum(eur*1.95583, 2)
 }
+
+Pytamath.cowAndBull = function(correctNumber, guessedNumber){
+    const correctNumberStr = correctNumber.toString()
+    const guessedNumberStr = guessedNumber.toString()
+
+    if(correctNumberStr.length != guessedNumberStr.length) return "The numbers must have the same number of digits"
+
+    let cows = 0, bulls = 0
+    for(let i = 0; i < correctNumberStr.length; i++){
+        if(guessedNumberStr[i] == correctNumberStr[i]) bulls++
+        else if(correctNumberStr.includes(guessedNumberStr[i])) cows++
+    }
+    return{
+        cows: cows,
+        bulls: bulls
+    }
+}
